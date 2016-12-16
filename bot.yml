@@ -1,0 +1,6 @@
+name: GROOT
+description: GROOT
+avatar: groot.jpg
+slackscopes:
+  - bot
+  - commands
