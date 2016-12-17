@@ -23,14 +23,14 @@
     }
 */
 
-
 var BotConfig = require('./config.json');
-
 var authCode = extractSlackCode("code");
+console.log("authCode: " + authCode);
 slackTokenIssuerCall(authCode);
 
 // This call is already being made by Slack Button
 function slackAuthUrl() {
+    console.log("*** Invoking slackAuthUrl... ***");
     var authUrl = BotConfig.slack.oauth_authorize_url 
       + "?client_id=" + BotConfig.slack.client_id 
       + "&scope=" + BotConfig.slack.scope 
@@ -38,20 +38,25 @@ function slackAuthUrl() {
       + "&team=" + BotConfig.slack.team 
       + "&state=" + BotConfig.slack.state;
     window.location = authUrl;
+    console.log("*** Invoked slackAuthUrl. ***");
 }
 
 function extractSlackCode(parameterName) {
-   //https://APP_NAME.herokuapp.com/oauth.js?code=XXXX&state=
+    console.log("*** Invoking extractSlackCode... ***");
+    //https://APP_NAME.herokuapp.com/oauth.js?code=XXXX&state=
     var result = null, tmp = [];
     location.search.substr(1).split("&").forEach(function (item) {
             tmp = item.split("=");
             if (tmp[0] === parameterName) 
                 result = decodeURIComponent(tmp[1]);
     });
+    console.log("extractSlackCode-result: " + result);
+    console.log("*** Invoked extractSlackCode. ***");
     return result;
 }
 
 function slackTokenIssuerCall(auth_code) {
+    console.log("*** Invoking slackTokenIssuerCall... ***");
     // Request: https://slack.com/api/oauth.access?client_id=XXXX&client_secret=XXXX&code=XXXX&pretty=1
     
     var http = require("https");
@@ -81,4 +86,5 @@ function slackTokenIssuerCall(auth_code) {
     });
 
     req.end();
+    console.log("*** Invoked slackTokenIssuerCall. ***");
 }
