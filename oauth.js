@@ -32,8 +32,44 @@
     }
 */
 
-function handleGetCalls() {
+
+var BotConfig = require('./config.json');
+
+slackAuthUrl();
+function slackAuthUrl() {
+    var authUrl = BotConfig.slack.oauth_authorize_url 
+      + "?client_id=" + BotConfig.slack.oauth_authorize_url.client_id 
+      + "&scope=" + BotConfig.slack.scope 
+      + "&redirect_uri=" + BotConfig.slack.redirect_uri 
+      + "&team=" + BotConfig.slack.team 
+      + "&state=" + BotConfig.slack.state;
+    window.location = authUrl;
+}
+
+
+function extractSlackCode() {
+    //https://groot-slack.herokuapp.com/oauth.js?code=XXXX&state=
+
+}
+
+function slackTokenIssuerCall() {
+    // Request:
+    // https://slack.com/api/oauth.access?client_id=XXXX&client_secret=XXXX&code=XXXX&pretty=1
     
+    // Response: 
+    /*
+    
+    {
+        "ok": true,
+        "access_token": "xoxp-XXXX",
+        "scope": "identify,channels:read,chat:write:bot",
+        "user_id": "U1XLXXXXLXXXXNQ",
+        "team_name": "XXXX",
+        "team_id": "T1XXXXXLSXXXX27NU"
+    }
+    
+    
+    */
 }
 
 
