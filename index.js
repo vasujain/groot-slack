@@ -5,6 +5,7 @@
 
 // Libraries
 var BotConfig = require('./config.json');
+var oAuth = require('./oauth.js');
 var Botkit = require("botkit");
 
 function onInstallation(bot, installer) {
